@@ -7,8 +7,12 @@ def read_contacts
 end
 
 def copy_contacts_names_and_phones
-  contact_hash = Hash.new
-  result = read_contacts.map {|contact| contact_hash = { "#{contact[:name]}": "#{contact[:phone]}"}}
+  read_contacts.map {|contact| contact_hash = { "#{contact[:name]}": "#{contact[:phone]}"}}
 end
 
-puts result = copy_contacts_names_and_phones
+def copy_contacts_from_usa
+  read_contacts.select{|contact| contact[:phone] =~ /^[+]1/} #regex for starts with +1
+end
+
+puts copy_contacts_names_and_phones.inspect
+puts copy_contacts_from_usa
